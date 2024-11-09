@@ -156,6 +156,8 @@ void NukiLockComponent::update_status()
         #ifdef USE_SENSOR
         if (this->battery_level_sensor_ != nullptr)
             this->battery_level_sensor_->publish_state(this->nuki_lock_.getBatteryPerc());
+        if (this->bt_signal_sensor_ != nullptr)
+            this->bt_signal_sensor_->publish_state(this->nuki_lock_.getRssi());
         #endif
         #ifdef USE_TEXT_SENSOR
         if (this->door_sensor_state_text_sensor_ != nullptr)
@@ -947,6 +949,7 @@ void NukiLockComponent::dump_config() {
     #endif
     #ifdef USE_SENSOR
     LOG_SENSOR(TAG, "Battery Level", this->battery_level_sensor_);
+    LOG_SENSOR(TAG, "Bluetooth Signal", this->bt_signal_sensor_);
     #endif
     #ifdef USE_SWITCH
     LOG_SWITCH(TAG, "Pairing Mode", this->pairing_mode_switch_);
